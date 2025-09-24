@@ -19,7 +19,7 @@ Supports concurrent reviews, **SSE live status**, **rate limiting**, **Mongo-bac
 * **Backend:** FastAPI, Pydantic, Motor (MongoDB async), SSE (EventSource)
 * **Worker:** Celery (Redis broker/results)
 * **Database:** MongoDB
-* **Infra:** Docker Compose (dev), Vercel/Netlify (FE), Render/Railway/Heroku (BE)
+* **Infra:** Docker Compose (dev), Vercel (FE), Render (BE)
 
 ---
 
