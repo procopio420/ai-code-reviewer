@@ -7,9 +7,9 @@ Supports concurrent reviews, **SSE live status**, **rate limiting**, **Mongo-bac
 
 ## Deployed URLs
 
-* **Frontend:** [https://your-frontend.example.com](https://your-frontend.example.com)
-* **Backend (API):** [https://your-backend.example.com](https://your-backend.example.com)
-* **API Docs (Swagger):** [https://your-backend.example.com/docs](https://your-backend.example.com/docs)
+* **Frontend:** [https://ai-code-reviewer-nine-topaz.vercel.app/](https://ai-code-reviewer-nine-topaz.vercel.app/)
+* **Backend (API):** [https://ai-code-reviewer-a771.onrender.com/api/](https://ai-code-reviewer-a771.onrender.com/api/)
+* **API Docs (Swagger):** [https://ai-code-reviewer-a771.onrender.com/docs](https://ai-code-reviewer-a771.onrender.com/docs)
 
 ---
 
