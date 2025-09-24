@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    ports: ["27017:27017"]
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    ports: ["6379:6379"]
+
+  api:
+    build:
+      context: .
+    env_file:
+      - ./.env
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/ai_code_review
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      RATE_LIMIT_REDIS_URL: redis://redis:6379/1
+      CACHE_REDIS_URL: redis://redis:6379/2
+      BACKEND_URL: http://api:8000
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      
+    depends_on:
+      - mongo
+      - redis
+    ports:
+      - "8000:8000"
+
+  worker:
+    build:
+      context: .
+    command: celery -A app.queue.celery worker -l info --concurrency=2 -I worker
+    env_file:
+      - ./.env
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/ai_code_review
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      RATE_LIMIT_REDIS_URL: redis://redis:6379/1
+      CACHE_REDIS_URL: redis://redis:6379/2
+      BACKEND_URL: http://api:8000
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    depends_on:
+      - mongo
+      - redis
+
+volumes:
+  mongo_data:
